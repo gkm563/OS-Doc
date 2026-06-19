@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# GKM Open Source Journey 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+"GKM Open Source Journey" is a production-grade, zero-cost, permanent tracking platform designed to document, organize, visualize, and preserve the complete open-source contribution memory of Gautam Kumar Maurya (GKM563).
 
-Currently, two official plugins are available:
+It spans platforms like GitHub, GitLab, Gerrit, Wikimedia/Wikipedia, and Phabricator, providing a public portfolio alongside an admin-managed CMS that writes updates directly back to Git.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tech Stack
+- **Frontend**: React 18, TypeScript, Tailwind CSS, Lucide Icons
+- **Caching**: TanStack Query
+- **Routing**: React Router v6
+- **Build tool**: Vite
+- **Serverless backend**: Netlify Functions (for admin git write/commit integrations)
+- **Database**: Versioned JSON files stored locally under `/data/*.json` (Git-as-a-Database pattern)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚡ Free Production Deployment (Netlify)
 
-## Expanding the ESLint configuration
+Since the system uses a **Git-as-a-Database** CMS architecture, it runs entirely on free-tier, serverless infrastructure forever, with no paid database locks.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Step-by-Step Deploy Guide
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Sign Up / Log In**:
+   - Go to [Netlify](https://www.netlify.com/) and log in using your GitHub account (`GKM563`).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. **Add a New Site**:
+   - Click **Add new site** -> **Import an existing project**.
+   - Choose **GitHub** as the provider and authorize Netlify.
+   - Search for and select your repository: **`OS-Doc`**.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. **Deploy Settings**:
+   - Netlify will automatically detect [netlify.toml](file:///c:/Users/Lenovo/OneDrive/Desktop/OS/netlify.toml) and configure:
+     - **Build Command**: `npm run build`
+     - **Publish Directory**: `dist`
+     - **Functions Directory**: `netlify/functions`
+   - Click **Deploy Site**.
+
+4. **Add Environment Secret** (Required for CMS write integration):
+   - In Netlify, go to **Site configuration** -> **Environment variables**.
+   - Click **Add a variable** and create:
+     - **Key**: `GITHUB_TOKEN`
+     - **Value**: *(Your GitHub Personal Access Token with repo/content scope)*
+   - This allows the serverless function to write modifications directly back to `data/` in your repository when you save entries from the Admin Portal.
+
+5. **Access Your Public Link**:
+   - Netlify will generate a free public URL (e.g., `gkm-os-journey.netlify.app`). You can customize this subdomain for free or map a custom domain if desired.
+
+---
+
+## 💻 Local Development
+
+### 1. Install Dependencies
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Start Local Server
+```bash
+npm run dev
 ```
+Open [http://localhost:5173/](http://localhost:5173/) in your browser.
+
+### 3. CMS write pipeline in development
+In local development, the Vite dev server uses a custom filesystem middleware (configured in [vite.config.ts](file:///c:/Users/Lenovo/OneDrive/Desktop/OS/vite.config.ts)) that writes additions and edits directly to the local `/data` files when you make updates in the Admin Portal.
+
+### 4. Admin Portal Login
+- **URL**: Go to `/admin` route or click **Admin Portal** in the sidebar.
+- **Default Username**: `GKM563`
+- **Default Password**: `gkm563`
+*(Auth credentials can be modified in [Admin.tsx](file:///c:/Users/Lenovo/OneDrive/Desktop/OS/src/pages/Admin.tsx#L37))*

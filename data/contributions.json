@@ -1,0 +1,112 @@
+[
+  {
+    "id": "c_001",
+    "title": "Add Tsishingini (tsw) language metadata and layout scripts",
+    "description": "Added ISO metadata and generator script entries for the Tsishingini language layout to resolve language setup issues in Wikipedia's language tools.",
+    "platform": "gerrit",
+    "status": "merged",
+    "repository": "mediawiki/extensions/UniversalLanguageSelector",
+    "task_id": "T428848",
+    "pr_or_change_id": "1302995",
+    "reviewers": ["ToluAyodele", "Srish"],
+    "review_notes": [
+      "Always run generator script before adding language data.",
+      "Check that language subtag meets ISO standards."
+    ],
+    "tags": ["i18n", "language-data", "wikipedia"],
+    "screenshots": [],
+    "links": ["https://gerrit.wikimedia.org/r/c/mediawiki/extensions/UniversalLanguageSelector/+/1302995"],
+    "date_started": "2026-06-15",
+    "date_completed": "2026-06-18",
+    "time_spent_minutes": 90,
+    "learning_note_id": "j_2026-06-18",
+    "related_contribution_ids": []
+  },
+  {
+    "id": "c_002",
+    "title": "Fix memory leak in Wikimedia Commons image uploader",
+    "description": "Resolved a memory leak caused by unremoved event listeners in the upload wizard's image cropping tool.",
+    "platform": "github",
+    "status": "merged",
+    "repository": "wikimedia/commons-app",
+    "task_id": "T321456",
+    "pr_or_change_id": "4212",
+    "reviewers": ["nicolas-raoul", "Muji"],
+    "review_notes": [
+      "Clean up listeners in componentWillUnmount or useEffect cleanup return.",
+      "Verify changes with leak-detecting unit tests."
+    ],
+    "tags": ["bug-fix", "memory-leak", "react"],
+    "screenshots": [],
+    "links": ["https://github.com/wikimedia/commons-app/pull/4212"],
+    "date_started": "2026-06-10",
+    "date_completed": "2026-06-12",
+    "time_spent_minutes": 180,
+    "learning_note_id": "j_2026-06-12",
+    "related_contribution_ids": []
+  },
+  {
+    "id": "c_003",
+    "title": "Migrate Gerrit patch verification flow to GitHub Actions runner",
+    "description": "Moved translation-server patch checking from legacy Jenkins server to a self-hosted GitHub Actions runner setup for Wikidata integration.",
+    "platform": "gitlab",
+    "status": "under_review",
+    "repository": "wikidata/translation-server",
+    "task_id": "T194883",
+    "pr_or_change_id": "893",
+    "reviewers": ["LydiaPintscher"],
+    "review_notes": [
+      "Ensure environment secrets are properly sandboxed on runner."
+    ],
+    "tags": ["devops", "ci-cd", "wikidata"],
+    "screenshots": [],
+    "links": ["https://gitlab.wikimedia.org/wikidata/translation-server/-/merge_requests/893"],
+    "date_started": "2026-06-16",
+    "date_completed": null,
+    "time_spent_minutes": 240,
+    "learning_note_id": null,
+    "related_contribution_ids": []
+  },
+  {
+    "id": "c_004",
+    "title": "Create Phabricator task for tracking RoadToWiki progression dashboard",
+    "description": "Detailed task mapping GKM's community roadmap and dashboard integration goals for Wikimedia community visibility.",
+    "platform": "phabricator",
+    "status": "open",
+    "repository": "wikimedia/roadtowiki",
+    "task_id": "T563910",
+    "pr_or_change_id": null,
+    "reviewers": ["Quiddity"],
+    "review_notes": [],
+    "tags": ["task-tracking", "community", "roadtowiki"],
+    "screenshots": [],
+    "links": ["https://phabricator.wikimedia.org/T563910"],
+    "date_started": "2026-06-17",
+    "date_completed": null,
+    "time_spent_minutes": 45,
+    "learning_note_id": null,
+    "related_contribution_ids": []
+  },
+  {
+    "id": "c_005",
+    "title": "Draft article content for newly discovered historical sites in Bihar",
+    "description": "Created comprehensive reference and outline details on Wikipedia regarding historical ruins in Bihar.",
+    "platform": "wikipedia",
+    "status": "merged",
+    "repository": "en.wikipedia.org",
+    "task_id": null,
+    "pr_or_change_id": "revision_10928372",
+    "reviewers": ["WikiEditor99"],
+    "review_notes": [
+      "Cite primary resources wherever possible."
+    ],
+    "tags": ["content", "history", "wikipedia-edit"],
+    "screenshots": [],
+    "links": ["https://en.wikipedia.org/wiki/Special:Diff/10928372"],
+    "date_started": "2026-06-05",
+    "date_completed": "2026-06-06",
+    "time_spent_minutes": 120,
+    "learning_note_id": "j_2026-06-06",
+    "related_contribution_ids": []
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "T563910",
+    "phid": "PHID-TASK-12345",
+    "name": "Create Phabricator task for tracking RoadToWiki progression dashboard",
+    "status": "open",
+    "uri": "https://phabricator.wikimedia.org/T563910",
+    "dateCreated": 1781775600,
+    "priority": "Normal",
+    "projects": ["RoadToWiki", "Open-Source-GKM"]
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "change_id": "I872d8291a10023a9d28",
+    "number": 1302995,
+    "project": "mediawiki/extensions/UniversalLanguageSelector",
+    "subject": "Add Tsishingini (tsw) language metadata and layout scripts",
+    "status": "MERGED",
+    "owner": "GKM563",
+    "created": "2026-06-15T11:00:00Z",
+    "updated": "2026-06-18T18:45:00Z",
+    "reviewers": ["ToluAyodele", "Srish"]
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "a_first_pr",
+    "title": "First Merged PR",
+    "description": "Successfully merged your first pull request on GitHub.",
+    "tier": "bronze",
+    "unlocked_at": "2026-06-12T14:30:00Z",
+    "icon": "GitPullRequest"
+  },
+  {
+    "id": "a_gerrit_merge",
+    "title": "Gerrit Contributor",
+    "description": "Merged your first patch set in Gerrit.",
+    "tier": "bronze",
+    "unlocked_at": "2026-06-18T18:45:00Z",
+    "icon": "GitCommit"
+  },
+  {
+    "id": "a_wiki_editor",
+    "title": "Wikipedia Editor",
+    "description": "Contributed verified historical references to en.wikipedia.org.",
+    "tier": "silver",
+    "unlocked_at": "2026-06-06T11:15:00Z",
+    "icon": "BookOpen"
+  },
+  {
+    "id": "a_streak_10",
+    "title": "10-Day Streak",
+    "description": "Maintain active contributions for 10 consecutive days.",
+    "tier": "bronze",
+    "unlocked_at": "2026-06-18T23:59:59Z",
+    "icon": "Flame"
+  },
+  {
+    "id": "a_polyglot",
+    "title": "Polyglot Contributor",
+    "description": "Contributed across 3 or more distinct platforms.",
+    "tier": "gold",
+    "unlocked_at": "2026-06-18T18:45:00Z",
+    "icon": "Globe"
+  }
+]

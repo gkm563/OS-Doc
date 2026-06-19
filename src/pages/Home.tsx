@@ -51,58 +51,58 @@ const MemoryPanel: FC<MemoryPanelProps> = ({
   }, [journalContent]);
 
   return (
-    <div className="mt-4 pt-4 border-t border-border-subtle space-y-4 text-xs">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="mt-5 pt-5 border-t border-border-subtle space-y-4 text-xs">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Reviewers info */}
-        <div className="space-y-1.5">
-          <span className="text-secondary font-mono block text-[10px] uppercase tracking-wider">Reviewers</span>
+        <div className="space-y-2">
+          <span className="text-secondary font-mono block text-[10px] uppercase tracking-widest font-semibold">Reviewers Assigned</span>
           {reviewers && reviewers.length > 0 ? (
             <div className="flex flex-wrap gap-1.5">
               {reviewers.map((r) => (
                 <Link
                   key={r}
                   to={`/reviewers/${r}`}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-elevated border border-border-subtle hover:border-accent transition-colors"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-elevated border border-border-subtle hover:border-accent transition-colors"
                 >
                   <User className="h-3 w-3 text-secondary" />
-                  <span>{r}</span>
+                  <span className="text-primary font-medium">{r}</span>
                 </Link>
               ))}
             </div>
           ) : (
-            <span className="text-secondary italic">No reviewers assigned.</span>
+            <span className="text-secondary italic block">No active reviewers recorded.</span>
           )}
         </div>
 
         {/* Reviewer Feedback Notes */}
-        <div className="space-y-1.5">
-          <span className="text-secondary font-mono block text-[10px] uppercase tracking-wider">Feedback Highlights</span>
+        <div className="space-y-2">
+          <span className="text-secondary font-mono block text-[10px] uppercase tracking-widest font-semibold">Reviewer Notes</span>
           {reviewNotes && reviewNotes.length > 0 ? (
-            <div className="space-y-1 bg-surface-elevated/40 border border-border-subtle p-2.5 rounded-lg">
-              <span className="text-primary font-semibold flex items-center gap-1.5">
-                <HelpCircle className="h-3.5 w-3.5 text-accent" />
-                Reviewer Notes:
+            <div className="space-y-1.5 bg-surface-elevated/40 border border-border-subtle p-3 rounded-xl">
+              <span className="text-primary font-bold flex items-center gap-1.5 text-xs">
+                <HelpCircle className="h-4 w-4 text-accent" />
+                Feedback Details:
               </span>
-              <ul className="list-disc pl-4.5 space-y-1 text-secondary leading-relaxed font-sans">
+              <ul className="list-disc pl-5 space-y-1 text-secondary leading-relaxed font-sans text-xs">
                 {reviewNotes.map((note, idx) => (
                   <li key={idx}>{note}</li>
                 ))}
               </ul>
             </div>
           ) : (
-            <span className="text-secondary italic">No direct notes logged.</span>
+            <span className="text-secondary italic block">No reviewer feedback logs.</span>
           )}
         </div>
       </div>
 
       {/* Lessons Learned Journal Markdown */}
-      <div className="space-y-1 bg-surface-elevated/20 border border-dashed border-border-default p-3 rounded-lg">
-        <span className="text-primary font-semibold flex items-center gap-1.5 mb-1.5">
-          <Lightbulb className="h-3.5 w-3.5 text-accent" />
-          Technical Learnings & Solutions:
+      <div className="space-y-2 bg-surface-elevated/20 border border-dashed border-border-default p-4 rounded-xl">
+        <span className="text-primary font-bold flex items-center gap-1.5 mb-1.5 text-xs">
+          <Lightbulb className="h-4 w-4 text-accent" />
+          Engineering Lessons & Retrospective:
         </span>
         {isLoading ? (
-          <div className="text-secondary italic">Loading learning entries...</div>
+          <div className="text-secondary italic">Fetching linked learning entries...</div>
         ) : journalContent ? (
           <div className="prose prose-sm dark:prose-invert max-w-none text-xs text-secondary leading-relaxed space-y-2 font-sans">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -110,9 +110,9 @@ const MemoryPanel: FC<MemoryPanelProps> = ({
             </ReactMarkdown>
           </div>
         ) : (
-          <div className="text-secondary italic flex items-center gap-1 text-[11px]">
+          <div className="text-secondary italic flex items-center gap-1.5 text-[11px]">
             <AlertTriangle className="h-3.5 w-3.5 text-status-pending" />
-            No detailed learning notes link configured.
+            No detailed post-mortem entry linked for this task.
           </div>
         )}
       </div>
@@ -279,84 +279,112 @@ export const Home: FC = () => {
   const isFiltered = searchVal || platformVal !== "all" || statusVal !== "all" || dateVal !== null;
 
   return (
-    <div className="space-y-12">
-      {/* Hero Banner */}
+    <div className="space-y-10">
+      {/* Portfolio Hero Intro Section */}
       <section className="relative overflow-hidden rounded-2xl border border-border-default bg-surface p-8 sm:p-12 shadow-sm">
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-status-open/10 rounded-full blur-3xl" />
 
-        <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div className="space-y-4 max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent font-mono">
+        <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="space-y-4 max-w-2xl flex-1">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-accent/10 text-accent font-mono">
               <Sparkles className="h-3 w-3" />
-              Open Source Journey
+              Open Source Journey Archive
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-primary leading-tight">
+            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-primary leading-tight font-sans">
               Gautam Kumar Maurya
             </h1>
-            <p className="text-lg text-secondary leading-relaxed font-normal">
-              Documenting, organizing, and preserving contributions across GitHub, Gerrit, GitLab, Wikimedia, and Phabricator. An open archive of learnings, code reviews, and milestones.
+            <p className="text-base sm:text-lg text-secondary leading-relaxed font-normal">
+              Welcome to my public contributions archive. Here, I chronicle my engineering journey across **Wikimedia, Gerrit, Phabricator, GitLab, and GitHub**. It maps out the code reviews, patches, community milestones, and technical retrospective lessons I've learned along the way.
             </p>
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a
+                href="https://github.com/GKM563"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg border border-border-subtle bg-surface-elevated text-xs font-semibold text-secondary hover:text-primary flex items-center gap-1.5 transition-colors"
+              >
+                <User className="h-3.5 w-3.5" />
+                GitHub Profile
+              </a>
+              <a
+                href="https://phabricator.wikimedia.org/p/Gautam_Maurya/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg border border-border-subtle bg-surface-elevated text-xs font-semibold text-secondary hover:text-primary flex items-center gap-1.5 transition-colors"
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                Wikimedia Profile
+              </a>
               <a
                 href="#timeline-section"
-                className="px-5 py-2.5 rounded-btn bg-accent hover:bg-accent-hover text-white font-medium text-sm flex items-center gap-2 shadow-lg shadow-accent/25 hover:shadow-accent/35 transition-all duration-150"
+                className="px-4 py-2 rounded-lg bg-accent hover:bg-accent-hover text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-md shadow-accent/20"
               >
-                Browse Timeline Feed
+                Explore Feed
                 <ChevronRight className="h-4 w-4" />
               </a>
-              <Link
-                to="/resume"
-                className="px-5 py-2.5 rounded-btn border border-border-default bg-surface hover:bg-surface-elevated text-primary font-medium text-sm transition-all duration-150"
-              >
-                View Professional CV
-              </Link>
             </div>
           </div>
 
-          {/* Quick Streak Card */}
-          <div className="bg-surface-elevated border border-border-default rounded-xl p-6 shrink-0 w-full md:w-72 flex flex-col items-center justify-center text-center shadow-md relative group hover:border-accent/40 transition-all duration-300">
-            <div className="h-12 w-12 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
-              <Flame className="h-6 w-6 fill-current" />
+          {/* Avatar & Streak Column */}
+          <div className="flex flex-col sm:flex-row md:flex-col gap-6 shrink-0 w-full md:w-auto items-center">
+            {/* Avatar with glowing ring */}
+            <div className="relative group shrink-0">
+              <div className="absolute inset-0.5 bg-gradient-to-tr from-accent to-status-open rounded-full blur opacity-40 group-hover:opacity-70 transition duration-500" />
+              <img
+                src="https://github.com/GKM563.png"
+                alt="Gautam Kumar Maurya"
+                className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-surface object-cover shadow-xl"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop";
+                }}
+              />
             </div>
-            <div className="text-3xl font-bold font-mono tracking-tight text-primary">
-              <CountUpComponent end={streaks.current} duration={2} /> Days
-            </div>
-            <p className="text-xs text-secondary mt-1 font-sans">Current Contribution Streak</p>
-            <div className="w-full border-t border-border-subtle mt-4 pt-4 flex justify-between text-xs text-secondary font-mono">
-              <span>Longest streak:</span>
-              <span className="font-semibold text-primary">{streaks.longest} days</span>
+
+            {/* Streak card */}
+            <div className="bg-surface-elevated border border-border-default rounded-xl p-5 shrink-0 w-full sm:w-48 md:w-56 flex flex-col items-center justify-center text-center shadow-md relative group hover:border-accent/40 transition-all duration-300">
+              <div className="h-10 w-10 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-200">
+                <Flame className="h-5 w-5 fill-current" />
+              </div>
+              <div className="text-2xl font-bold font-mono tracking-tight text-primary">
+                <CountUpComponent end={streaks.current} duration={2} /> Days
+              </div>
+              <p className="text-[10px] text-secondary mt-1 font-sans uppercase tracking-wider font-semibold">Active Streak</p>
+              <div className="w-full border-t border-border-subtle mt-3 pt-3 flex justify-between text-[10px] text-secondary font-mono">
+                <span>Longest:</span>
+                <span className="font-semibold text-primary">{streaks.longest} days</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Counters Stats */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Horizontal Stats Strip (Portfolio Vibe) */}
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-6 bg-surface/50 border border-border-default rounded-2xl p-6 shadow-sm backdrop-blur-sm">
         {[
-          { label: "Total Contributions", count: totalContribs, icon: GitFork, color: "text-accent bg-accent/10" },
+          { label: "Contributions Logged", count: totalContribs, icon: GitFork, color: "text-accent bg-accent/10" },
           { label: "Merged PRs / Changes", count: mergedPRs, icon: CheckCircle2, color: "text-status-merged bg-status-merged/10" },
-          { label: "Open Reviews / Tasks", count: underReview, icon: GitFork, color: "text-status-open bg-status-open/10" },
+          { label: "Pending Reviews / Open", count: underReview, icon: Clock, color: "text-status-open bg-status-open/10" },
           { label: "Milestones Unlocked", count: totalAchievements, icon: Trophy, color: "text-yellow-500 bg-yellow-500/10" },
         ].map((stat, idx) => {
           const Icon = stat.icon;
           return (
             <div
               key={idx}
-              className="bg-surface border border-border-default rounded-xl p-6 flex flex-col justify-between shadow-sm"
+              className="flex items-center gap-4 lg:border-r border-border-subtle last:border-r-0 lg:pr-4"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-secondary">{stat.label}</span>
-                <div className={`p-2 rounded-lg ${stat.color}`}>
-                  <Icon className="h-4 w-4" />
-                </div>
+              <div className={`p-3 rounded-xl shrink-0 ${stat.color}`}>
+                <Icon className="h-5 w-5" />
               </div>
-              <div className="text-3xl font-bold font-mono tracking-tight text-primary mt-2">
-                {loadingContribs ? (
-                  "..."
-                ) : (
-                  <CountUpComponent end={stat.count} duration={1.5} />
-                )}
+              <div className="min-w-0">
+                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest block truncate">{stat.label}</span>
+                <span className="text-2xl font-black font-mono tracking-tight text-primary mt-1 block">
+                  {loadingContribs ? (
+                    "..."
+                  ) : (
+                    <CountUpComponent end={stat.count} duration={1.5} />
+                  )}
+                </span>
               </div>
             </div>
           );
@@ -364,13 +392,13 @@ export const Home: FC = () => {
       </section>
 
       {/* Heatmap Area */}
-      <section className="bg-surface border border-border-default rounded-xl p-6 shadow-sm">
+      <section className="bg-surface border border-border-default rounded-2xl p-6 shadow-sm">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-lg font-semibold text-primary">Contribution Heatmap</h2>
-            <p className="text-xs text-secondary mt-0.5">Visualize consistency and click blocks to filter timeline by specific dates</p>
+            <h2 className="text-base font-bold text-primary">Activity Heatmap</h2>
+            <p className="text-xs text-secondary mt-0.5">Visualize contributions cadence and click dates to filter timeline</p>
           </div>
-          <span className="text-[11px] text-secondary font-mono">
+          <span className="text-[11px] text-secondary font-mono bg-surface-elevated border border-border-subtle px-2.5 py-1 rounded-md">
             {totalContribs} active events
           </span>
         </div>
@@ -442,7 +470,7 @@ export const Home: FC = () => {
         {/* Heatmap Legend */}
         <div className="flex items-center justify-between text-xs text-secondary mt-4 pt-4 border-t border-border-subtle">
           <span className="text-[10px] font-mono text-secondary italic">
-            Tip: click any block to filter feed below.
+            Tip: click blocks to drill timeline.
           </span>
           <div className="flex items-center gap-1.5 font-mono text-[10px]">
             <span>Less</span>
@@ -457,13 +485,15 @@ export const Home: FC = () => {
 
       {/* Unified Timeline Journey Feed Section */}
       <section id="timeline-section" className="space-y-6 scroll-mt-20">
-        <div className="border-b border-border-subtle pb-4">
-          <h2 className="text-2xl font-bold tracking-tight text-primary">Timeline Journey Feed</h2>
-          <p className="text-xs text-secondary mt-1">Chronological catalog of Gautam's contributions, tasks, and commits.</p>
+        <div className="border-b border-border-subtle pb-4 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold tracking-tight text-primary">Open Source Contributions Timeline</h2>
+            <p className="text-xs text-secondary mt-0.5">A chronological catalog of my commits, code reviews, and merged changes.</p>
+          </div>
         </div>
 
         {/* Interactive Filter Bar */}
-        <div className="bg-surface border border-border-default rounded-xl p-5 shadow-sm space-y-4">
+        <div className="bg-surface border border-border-default rounded-2xl p-5 shadow-sm space-y-4">
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search Box */}
             <div className="flex-1 relative">
@@ -473,7 +503,7 @@ export const Home: FC = () => {
                 placeholder="Search by title, description, repository, tags..."
                 value={searchVal}
                 onChange={(e) => setSearchVal(e.target.value)}
-                className="w-full pl-10 pr-10 py-3 rounded-btn border border-border-subtle bg-surface-elevated text-sm text-primary placeholder-secondary focus:border-accent focus:outline-none transition-all"
+                className="w-full pl-10 pr-10 py-3 rounded-xl border border-border-subtle bg-surface-elevated text-sm text-primary placeholder-secondary focus:border-accent focus:outline-none transition-all"
               />
               {searchVal && (
                 <button
@@ -491,7 +521,7 @@ export const Home: FC = () => {
               <select
                 value={platformVal}
                 onChange={(e) => setPlatformVal(e.target.value)}
-                className="px-3.5 py-3 rounded-btn border border-border-subtle bg-surface-elevated text-xs font-semibold text-primary focus:border-accent focus:outline-none transition-colors"
+                className="px-3.5 py-3 rounded-xl border border-border-subtle bg-surface-elevated text-xs font-semibold text-primary focus:border-accent focus:outline-none transition-colors"
               >
                 <option value="all">All Platforms</option>
                 <option value="github">GitHub</option>
@@ -505,7 +535,7 @@ export const Home: FC = () => {
               <select
                 value={statusVal}
                 onChange={(e) => setStatusVal(e.target.value)}
-                className="px-3.5 py-3 rounded-btn border border-border-subtle bg-surface-elevated text-xs font-semibold text-primary focus:border-accent focus:outline-none transition-colors"
+                className="px-3.5 py-3 rounded-xl border border-border-subtle bg-surface-elevated text-xs font-semibold text-primary focus:border-accent focus:outline-none transition-colors"
               >
                 <option value="all">All Statuses</option>
                 <option value="merged">Merged</option>
@@ -520,27 +550,27 @@ export const Home: FC = () => {
           {isFiltered && (
             <div className="flex items-center justify-between pt-4 border-t border-border-subtle text-xs">
               <div className="flex flex-wrap items-center gap-2 text-secondary">
-                <span className="font-mono text-[10px] uppercase tracking-wider">Active filters:</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider font-semibold">Active filters:</span>
                 {dateVal && (
-                  <span className="bg-accent/10 border border-accent/20 text-accent px-2 py-0.5 rounded flex items-center gap-1 font-mono text-[11px]">
+                  <span className="bg-accent/10 border border-accent/20 text-accent px-2.5 py-0.5 rounded-lg flex items-center gap-1 font-mono text-[11px]">
                     Date: {formatLocalDate(dateVal)}
                     <button onClick={() => setDateVal(null)}><X className="h-3 w-3" /></button>
                   </span>
                 )}
                 {searchVal && (
-                  <span className="bg-surface-elevated px-2 py-0.5 rounded border border-border-subtle flex items-center gap-1 font-mono text-[11px]">
+                  <span className="bg-surface-elevated px-2.5 py-0.5 rounded-lg border border-border-subtle flex items-center gap-1 font-mono text-[11px]">
                     Query: "{searchVal}"
                     <button onClick={() => setSearchVal("")}><X className="h-3 w-3" /></button>
                   </span>
                 )}
                 {platformVal !== "all" && (
-                  <span className="bg-surface-elevated px-2 py-0.5 rounded border border-border-subtle flex items-center gap-1 font-mono text-[11px] capitalize">
+                  <span className="bg-surface-elevated px-2.5 py-0.5 rounded-lg border border-border-subtle flex items-center gap-1 font-mono text-[11px] capitalize">
                     Platform: {platformVal}
                     <button onClick={() => setPlatformVal("all")}><X className="h-3 w-3" /></button>
                   </span>
                 )}
                 {statusVal !== "all" && (
-                  <span className="bg-surface-elevated px-2 py-0.5 rounded border border-border-subtle flex items-center gap-1 font-mono text-[11px] replace-dash text-ellipsis">
+                  <span className="bg-surface-elevated px-2.5 py-0.5 rounded-lg border border-border-subtle flex items-center gap-1 font-mono text-[11px] capitalize">
                     Status: {statusVal.replace("_", " ")}
                     <button onClick={() => setStatusVal("all")}><X className="h-3 w-3" /></button>
                   </span>
@@ -548,7 +578,7 @@ export const Home: FC = () => {
               </div>
               <button
                 onClick={clearFilters}
-                className="flex items-center gap-1 text-accent hover:text-accent-hover font-semibold transition-colors shrink-0"
+                className="flex items-center gap-1.5 text-accent hover:text-accent-hover font-bold transition-colors shrink-0"
               >
                 <X className="h-3.5 w-3.5" />
                 Clear Filters
@@ -559,9 +589,9 @@ export const Home: FC = () => {
 
         {/* Timeline Stream */}
         {loadingContribs ? (
-          <div className="py-20 text-center text-secondary">Loading timeline database...</div>
+          <div className="py-20 text-center text-secondary">Analyzing project history...</div>
         ) : sortedFiltered.length === 0 ? (
-          <div className="py-20 text-center border border-dashed border-border-default bg-surface rounded-xl flex flex-col items-center justify-center p-8">
+          <div className="py-20 text-center border border-dashed border-border-default bg-surface rounded-2xl flex flex-col items-center justify-center p-8">
             <Info className="h-10 w-10 text-secondary mb-3" />
             <span className="text-sm font-semibold text-primary">No journey records match the filters</span>
             <p className="text-xs text-secondary mt-1 max-w-sm text-center">
@@ -577,46 +607,41 @@ export const Home: FC = () => {
             )}
           </div>
         ) : (
-          <div className="relative border-l-2 border-border-subtle ml-4 pl-6 md:ml-8 md:pl-8 space-y-8 py-2">
+          <div className="relative border-l-2 border-border-subtle ml-4 pl-8 md:ml-8 md:pl-10 space-y-10 py-4">
             {sortedFiltered.map((c) => {
               const isExpanded = !!expandedIds[c.id];
               return (
                 <div key={c.id} className="relative group/time">
-                  {/* Vertical Timeline Node Dot */}
-                  <div
-                    className={`absolute -left-[31px] md:-left-[39px] top-2 h-4.5 w-4.5 rounded-full border-2 bg-background transition-all duration-150 flex items-center justify-center ${
-                      c.status === "merged"
-                        ? "border-status-merged text-status-merged"
-                        : c.status === "rejected"
-                        ? "border-status-rejected text-status-rejected"
-                        : "border-status-open text-status-open"
-                    }`}
-                  >
-                    <div
-                      className={`h-1.5 w-1.5 rounded-full ${
-                        c.status === "merged"
-                          ? "bg-status-merged"
-                          : c.status === "rejected"
-                          ? "bg-status-rejected"
-                          : "bg-status-open"
-                      }`}
-                    />
+                  {/* Circular Platform Badge directly on the Timeline Line */}
+                  <div className="absolute -left-[46px] md:-left-[54px] top-2 z-10 transition-all duration-200 hover:scale-115">
+                    <PlatformBadge platform={c.platform} showIconOnly className="h-8 w-8 rounded-full bg-surface border-border-default shadow-md" />
                   </div>
 
-                  {/* Contribution Card */}
-                  <div className="bg-surface border border-border-default rounded-xl p-5 hover:border-accent/40 shadow-sm transition-all duration-200">
+                  {/* Contribution Card - Changelog Post Styling */}
+                  <div className="bg-surface border border-border-default rounded-2xl p-6 hover:border-accent/30 shadow-sm transition-all duration-200">
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                      {/* Platform & Title */}
+                      {/* Meta Info */}
                       <div className="space-y-1.5 min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <PlatformBadge platform={c.platform} />
-                          <span className="text-[11px] font-mono text-secondary">
-                            {c.repository} {c.pr_or_change_id ? `· #${c.pr_or_change_id}` : ""}
-                          </span>
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono text-secondary">
+                          <span className="font-bold text-primary">{c.repository}</span>
+                          {c.pr_or_change_id && (
+                            <>
+                              <span>·</span>
+                              <span className="font-semibold text-accent">#{c.pr_or_change_id}</span>
+                            </>
+                          )}
+                          {c.task_id && (
+                            <>
+                              <span>·</span>
+                              <span>Task: {c.task_id}</span>
+                            </>
+                          )}
                         </div>
+                        
+                        {/* Changelog Title */}
                         <Link
                           to={`/contributions/${c.id}`}
-                          className="font-bold text-base sm:text-lg text-primary hover:text-accent tracking-tight leading-snug block transition-colors"
+                          className="font-extrabold text-lg sm:text-xl text-primary hover:text-accent tracking-tight leading-snug block transition-colors"
                         >
                           {c.title}
                         </Link>
@@ -631,50 +656,50 @@ export const Home: FC = () => {
                       </div>
                     </div>
 
-                    {/* Description summary */}
-                    <p className="text-xs sm:text-sm text-secondary leading-relaxed mt-3.5 font-normal">
+                    {/* Changelog Narrative Body */}
+                    <p className="text-sm text-secondary leading-relaxed mt-4 font-normal font-sans">
                       {c.description}
                     </p>
 
-                    {/* Metadata summary (time, tags, buttons) */}
+                    {/* Metadata Summary & Expandable buttons */}
                     <div className="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-border-subtle">
                       <div className="flex flex-wrap items-center gap-1.5">
                         {c.tags &&
-                          c.tags.slice(0, 3).map((tag) => (
+                          c.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2 py-0.5 rounded bg-surface-elevated border border-border-subtle text-[10px] font-mono text-secondary"
+                              className="px-2.5 py-0.5 rounded-lg bg-surface-elevated border border-border-subtle text-[10px] font-mono text-secondary"
                             >
-                              {tag}
+                              #{tag}
                             </span>
                           ))}
                         {c.time_spent_minutes > 0 && (
-                          <span className="text-[10px] font-mono text-secondary flex items-center gap-1 bg-surface-elevated/40 border border-border-subtle/50 px-2 py-0.5 rounded">
+                          <span className="text-[10px] font-mono text-secondary flex items-center gap-1 bg-surface-elevated/40 border border-border-subtle/50 px-2 py-0.5 rounded-lg">
                             <Clock className="h-3 w-3" />
                             {c.time_spent_minutes}m
                           </span>
                         )}
                       </div>
 
-                      <div className="flex items-center gap-2.5">
+                      <div className="flex items-center gap-3">
                         {/* Toggle Memory Accordion */}
                         <button
                           onClick={() => toggleExpand(c.id)}
-                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-btn text-xs font-semibold border transition-all ${
+                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all ${
                             isExpanded
                               ? "bg-accent/10 border-accent/20 text-accent"
                               : "border-border-subtle text-secondary hover:text-primary hover:border-border-default"
                           }`}
                         >
                           <BookOpen className="h-3.5 w-3.5" />
-                          {isExpanded ? "Close Memory" : "Read Memory"}
+                          {isExpanded ? "Hide Lessons" : "Read Memory Note"}
                         </button>
 
                         {/* Full page audit link */}
                         <Link
                           to={`/contributions/${c.id}`}
-                          className="text-secondary hover:text-accent p-1.5 rounded-md hover:bg-surface-elevated transition-colors"
-                          title="Full Record details"
+                          className="text-secondary hover:text-accent p-2 rounded-xl hover:bg-surface-elevated transition-colors border border-border-subtle"
+                          title="View Full record detail"
                         >
                           <ChevronRight className="h-4 w-4" />
                         </Link>

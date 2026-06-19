@@ -3,12 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useUIStore } from "../store/uiStore";
 import { CommandPalette } from "./CommandPalette";
 import {
-  Layers,
-  BarChart3,
   Calendar,
-  GitCommit,
   BookOpen,
-  UserCheck,
   Trophy,
   FileText,
   Shield,
@@ -30,18 +26,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
 
   const menuItems = [
-    { name: "Overview", path: "/", icon: Layers },
-    { name: "Dashboard", path: "/dashboard", icon: BarChart3 },
-    { name: "Timeline", path: "/timeline", icon: Calendar },
-    { name: "Contributions DB", path: "/contributions", icon: GitCommit },
+    { name: "Journey Feed", path: "/", icon: Calendar },
     { name: "Learning Journal", path: "/journal", icon: BookOpen },
-    { name: "Reviewer KB", path: "/reviewers", icon: UserCheck },
-    { name: "Analytics Suite", path: "/analytics", icon: BarChart3 },
     { name: "Achievements", path: "/achievements", icon: Trophy },
-    { name: "Resume Export", path: "/resume", icon: FileText },
+    { name: "Resume / CV", path: "/resume", icon: FileText },
   ];
-
-  const adminItem = { name: "Admin Portal", path: "/admin", icon: Shield };
 
   const isActive = (path: string) => {
     if (path === "/") {
@@ -93,23 +82,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               </Link>
             );
           })}
-
-          <div className="pt-6 border-t border-border-subtle mt-6 space-y-1">
-            <div className="text-[10px] font-mono text-secondary px-3 mb-2 uppercase tracking-widest">
-              CMS Gated
-            </div>
-            <Link
-              to={adminItem.path}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 group ${
-                isActive(adminItem.path)
-                  ? "bg-accent/10 text-accent font-medium border border-accent/20"
-                  : "text-secondary hover:text-primary hover:bg-surface-elevated border border-transparent"
-              }`}
-            >
-              <adminItem.icon className={`h-4 w-4 shrink-0 ${isActive(adminItem.path) ? "text-accent" : "text-secondary group-hover:text-primary"}`} />
-              <span className="truncate">{adminItem.name}</span>
-            </Link>
-          </div>
         </nav>
 
         {/* Sidebar Footer */}
@@ -119,13 +91,26 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="h-2 w-2 rounded-full bg-status-merged animate-pulse" />
               <span className="text-[11px] text-secondary font-mono">Sync Bot: active</span>
             </div>
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-md hover:bg-surface-elevated border border-border-subtle text-secondary hover:text-primary transition-all duration-150"
-              title="Toggle theme"
-            >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </button>
+            <div className="flex items-center gap-1.5">
+              <Link
+                to="/admin"
+                className={`p-2 rounded-md hover:bg-surface-elevated border transition-all duration-150 ${
+                  isActive("/admin")
+                    ? "bg-accent/10 border-accent/20 text-accent"
+                    : "border-border-subtle text-secondary hover:text-primary"
+                }`}
+                title="Admin Portal"
+              >
+                <Shield className="h-4 w-4" />
+              </Link>
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-md hover:bg-surface-elevated border border-border-subtle text-secondary hover:text-primary transition-all duration-150"
+                title="Toggle theme"
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </button>
+            </div>
           </div>
         </div>
       </aside>
@@ -233,29 +218,26 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   );
                 })}
 
-                <div className="pt-6 border-t border-border-subtle mt-6 space-y-1.5">
-                  <div className="text-[10px] font-mono text-secondary px-3 mb-2 uppercase tracking-widest">
-                    CMS Gated
-                  </div>
-                  <Link
-                    to={adminItem.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 ${
-                      isActive(adminItem.path)
-                        ? "bg-accent/10 text-accent font-medium border border-accent/20"
-                        : "text-secondary hover:text-primary hover:bg-surface-elevated border border-transparent"
-                    }`}
-                  >
-                    <adminItem.icon className={`h-4.5 w-4.5 ${isActive(adminItem.path) ? "text-accent" : "text-secondary"}`} />
-                    <span>{adminItem.name}</span>
-                  </Link>
-                </div>
               </nav>
 
               {/* Drawer Footer */}
-              <div className="pt-6 border-t border-border-subtle mt-auto flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-status-merged" />
-                <span className="text-xs text-secondary font-mono">Sync Bot: online</span>
+              <div className="pt-6 border-t border-border-subtle mt-auto flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-status-merged" />
+                  <span className="text-xs text-secondary font-mono">Sync Bot: online</span>
+                </div>
+                <Link
+                  to="/admin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`p-1.5 rounded-md hover:bg-surface-elevated border transition-all ${
+                    isActive("/admin")
+                      ? "bg-accent/10 border-accent/20 text-accent"
+                      : "border-border-subtle text-secondary hover:text-primary"
+                  }`}
+                  title="Admin Portal"
+                >
+                  <Shield className="h-4.5 w-4.5" />
+                </Link>
               </div>
             </div>
           </div>

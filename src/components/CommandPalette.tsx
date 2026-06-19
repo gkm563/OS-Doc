@@ -9,11 +9,8 @@ import {
   BookOpen,
   GitCommit,
   Trophy,
-  BarChart3,
   Calendar,
-  Layers,
   FileText,
-  User,
   Shield,
 } from "lucide-react";
 
@@ -40,13 +37,8 @@ export const CommandPalette: React.FC = () => {
 
   // Prepare searchable items
   const staticPages = [
-    { id: "nav-home", title: "Home", category: "Navigation", path: "/", icon: Layers, description: "Overview of Gautam's open source journey" },
-    { id: "nav-dash", title: "Dashboard", category: "Navigation", path: "/dashboard", icon: BarChart3, description: "Search, filter, and drill down on contributions" },
-    { id: "nav-timeline", title: "Timeline", category: "Navigation", path: "/timeline", icon: Calendar, description: "Historical chronological stream" },
-    { id: "nav-contrib", title: "Contributions Database", category: "Navigation", path: "/contributions", icon: GitCommit, description: "All code reviews and merge logs" },
+    { id: "nav-home", title: "Journey Feed", category: "Navigation", path: "/", icon: Calendar, description: "Chronological feed of Gautam's open source journey" },
     { id: "nav-journal", title: "Learning Journal", category: "Navigation", path: "/journal", icon: BookOpen, description: "Lessons learned, feedback applied, and post-mortems" },
-    { id: "nav-reviewers", title: "Reviewer KB", category: "Navigation", path: "/reviewers", icon: User, description: "Feedback logs grouped by maintainer" },
-    { id: "nav-analytics", title: "Analytics suite", category: "Navigation", path: "/analytics", icon: BarChart3, description: "Metric charts and streak visualizations" },
     { id: "nav-achieve", title: "Achievements & Milestones", category: "Navigation", path: "/achievements", icon: Trophy, description: "Earned badges and contributions milestones" },
     { id: "nav-resume", title: "Auto-generated Resume (CV)", category: "Navigation", path: "/resume", icon: FileText, description: "Printable professional portfolio snapshot" },
     { id: "nav-admin", title: "Admin Portal (CMS)", category: "Navigation", path: "/admin", icon: Shield, description: "Log contributions and edit database" },

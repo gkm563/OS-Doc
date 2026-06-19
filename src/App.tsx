@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { Dashboard } from "./pages/Dashboard";
-import { Timeline } from "./pages/Timeline";
 import { ContributionDetail } from "./pages/ContributionDetail";
 import { PlatformSection } from "./pages/PlatformSection";
 import { LearningJournal } from "./pages/LearningJournal";
@@ -31,8 +30,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/timeline" element={<Timeline />} />
-            <Route path="/contributions" element={<Dashboard />} /> {/* Fallback database view */}
+            <Route path="/timeline" element={<Navigate to="/" replace />} />
+            <Route path="/contributions" element={<Navigate to="/" replace />} />
             <Route path="/contributions/:id" element={<ContributionDetail />} />
             <Route path="/platforms/:platform" element={<PlatformSection />} />
             <Route path="/journal" element={<LearningJournal />} />

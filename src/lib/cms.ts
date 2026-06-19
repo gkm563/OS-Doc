@@ -26,6 +26,65 @@ export const writeDataFile = async (filePath: string, data: any): Promise<boolea
     }
   }
 
+  // Check if we have a direct GitHub token in localStorage
+  const directToken = localStorage.getItem("gkm-pat");
+  if (directToken) {
+    try {
+      const owner = "GKM563";
+      const repo = "OS-Doc";
+      
+      // 1. Fetch file to get current SHA (required for GitHub Content updates)
+      const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+      const getRes = await fetch(getUrl, {
+        headers: {
+          Authorization: `Bearer ${directToken}`,
+          Accept: "application/vnd.github+json",
+        },
+      });
+      
+      let sha: string | undefined;
+      if (getRes.status === 200) {
+        const getJson = await getRes.json();
+        sha = getJson.sha;
+      }
+      
+      // 2. Commit updated contents (using safe base64 encoding for utf-8)
+      const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+      
+      // Safe base64 conversion for unicode characters (like Hindi translations)
+      const base64Content = btoa(encodeURIComponent(content).replace(/%([0-9A-F]{2})/g, (_, p1) => {
+        return String.fromCharCode(parseInt(p1, 16));
+      }));
+
+      const putBody = {
+        message: `chore(cms): update ${filePath} from client admin panel`,
+        content: base64Content,
+        sha,
+      };
+      
+      const putRes = await fetch(putUrl, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${directToken}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(putBody),
+      });
+      
+      if (!putRes.ok) {
+        const putErr = await putRes.text();
+        throw new Error(`GitHub direct write failed: ${putErr}`);
+      }
+      
+      return true;
+    } catch (error) {
+      console.error("Direct GitHub write error:", error);
+      alert(`GitHub CMS Commit Failed: ${error instanceof Error ? error.message : String(error)}`);
+      return false;
+    }
+  }
+
   // Production path: Write to GitHub via Netlify Function endpoint
   try {
     const response = await fetch("/.netlify/functions/commit-writer", {

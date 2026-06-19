@@ -25,8 +25,10 @@ export const Admin: React.FC = () => {
   const { data: reviewers = [] } = useReviewers();
   const { data: achievements = [] } = useAchievements();
 
-  // Authentication Mock State
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Authentication State (Auto-login if PAT exists in localStorage)
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!localStorage.getItem("gkm-pat");
+  });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
@@ -35,9 +37,14 @@ export const Admin: React.FC = () => {
     e.preventDefault();
     if (username === "GKM563" && password === "gkm563") {
       setIsAuthenticated(true);
+      localStorage.removeItem("gkm-pat"); // standard local dev mode
+      setAuthError("");
+    } else if (username === "GKM563" && (password.startsWith("ghp_") || password.startsWith("github_pat_"))) {
+      setIsAuthenticated(true);
+      localStorage.setItem("gkm-pat", password); // save token for direct write
       setAuthError("");
     } else {
-      setAuthError("Invalid credentials. Try GKM563 / gkm563.");
+      setAuthError("Invalid credentials. Try 'gkm563' for local mode, or paste your GitHub Personal Access Token (starts with 'ghp_' or 'github_pat_') for production write access.");
     }
   };
 
@@ -326,7 +333,10 @@ export const Admin: React.FC = () => {
           <p className="text-xs text-secondary mt-1">Manage database records and write updates directly to Git.</p>
         </div>
         <button
-          onClick={() => setIsAuthenticated(false)}
+          onClick={() => {
+            setIsAuthenticated(false);
+            localStorage.removeItem("gkm-pat");
+          }}
           className="px-4 py-2 border border-border-subtle rounded-btn text-xs text-secondary hover:text-primary bg-surface flex items-center gap-1.5 self-start"
         >
           <LogOut className="h-4 w-4" />

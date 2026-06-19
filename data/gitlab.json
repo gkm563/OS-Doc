@@ -1,0 +1,12 @@
+[
+  {
+    "iid": 893,
+    "title": "Migrate Gerrit patch verification flow to GitHub Actions runner",
+    "project": "wikidata/translation-server",
+    "state": "opened",
+    "created_at": "2026-06-16T08:30:00Z",
+    "web_url": "https://gitlab.wikimedia.org/wikidata/translation-server/-/merge_requests/893",
+    "assignee": "GKM563",
+    "reviewers": ["LydiaPintscher"]
+  }
+]

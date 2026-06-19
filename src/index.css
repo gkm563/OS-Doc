@@ -1,0 +1,114 @@
+@import "@fontsource/inter/index.css";
+@import "@fontsource/jetbrains-mono/index.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  html[data-theme="light"] {
+    --bg-base: #FFFFFF;
+    --bg-surface: #F8FAFC;
+    --bg-surface-elevated: #FFFFFF;
+    --border-subtle: #F1F5F9;
+    --border-default: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-secondary: #64748B;
+    --accent-primary: #6366F1;
+    --accent-primary-hover: #818CF8;
+    --status-merged: #10B981;
+    --status-open: #3B82F6;
+    --status-pending: #F59E0B;
+    --status-rejected: #EF4444;
+  }
+
+  html[data-theme="dark"] {
+    --bg-base: #0B0E14;
+    --bg-surface: #161B22;
+    --bg-surface-elevated: #1C2128;
+    --border-subtle: #262C36;
+    --border-default: #30363D;
+    --text-primary: #E6EDF3;
+    --text-secondary: #8B949E;
+    --accent-primary: #6366F1;
+    --accent-primary-hover: #818CF8;
+    --status-merged: #10B981;
+    --status-open: #3B82F6;
+    --status-pending: #F59E0B;
+    --status-rejected: #EF4444;
+  }
+}
+
+body {
+  @apply bg-background text-primary font-sans antialiased transition-colors duration-200;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: var(--text-primary);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Custom cmdk overrides */
+[cmdk-root] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+[cmdk-input] {
+  font-family: inherit;
+  font-size: 16px;
+  width: 100%;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+[cmdk-item] {
+  content-visibility: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Print layout overrides */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-break-inside-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

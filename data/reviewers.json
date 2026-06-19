@@ -1,0 +1,78 @@
+[
+  {
+    "id": "r_tolu_ayodele",
+    "name": "ToluAyodele",
+    "platforms": ["gerrit"],
+    "feedback": [
+      {
+        "date": "2026-06-18",
+        "category": "process",
+        "text": "Always run generator script before adding language data.",
+        "applied_in": ["c_001"],
+        "internalized": true
+      },
+      {
+        "date": "2026-06-18",
+        "category": "code_style",
+        "text": "Check that language subtag meets ISO standards.",
+        "applied_in": ["c_001"],
+        "internalized": true
+      }
+    ]
+  },
+  {
+    "id": "r_nicolas_raoul",
+    "name": "nicolas-raoul",
+    "platforms": ["github"],
+    "feedback": [
+      {
+        "date": "2026-06-12",
+        "category": "code_style",
+        "text": "Clean up listeners in componentWillUnmount or useEffect cleanup return.",
+        "applied_in": ["c_002"],
+        "internalized": true
+      },
+      {
+        "date": "2026-06-12",
+        "category": "tooling",
+        "text": "Verify changes with leak-detecting unit tests.",
+        "applied_in": ["c_002"],
+        "internalized": false
+      }
+    ]
+  },
+  {
+    "id": "r_lydia_pintscher",
+    "name": "LydiaPintscher",
+    "platforms": ["gitlab"],
+    "feedback": [
+      {
+        "date": "2026-06-16",
+        "category": "process",
+        "text": "Ensure environment secrets are properly sandboxed on runner.",
+        "applied_in": ["c_003"],
+        "internalized": false
+      }
+    ]
+  },
+  {
+    "id": "r_quiddity",
+    "name": "Quiddity",
+    "platforms": ["phabricator"],
+    "feedback": []
+  },
+  {
+    "id": "r_wikieditor99",
+    "name": "WikiEditor99",
+    "platforms": ["wikipedia"],
+    "feedback": [
+      {
+        "date": "2026-06-06",
+        "category": "domain_knowledge",
+        "text": "Cite primary resources wherever possible.",
+        "applied_in": ["c_005"],
+        "internalized": true
+      }
+    ]
+  }
+]
